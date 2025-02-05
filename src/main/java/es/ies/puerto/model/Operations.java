@@ -16,19 +16,23 @@ public interface Operations {
      * Lee un empleado a partir de su identificador único.
      * 
      * @param identificador único del empleado.
-     * @return El Empleado correspondiente al identificador, o null si no se encuentra.
+     * @return El Empleado correspondiente al identificador, o null si no se
+     *         encuentra.
      */
     Empleado read(String identificador);
 
     /**
      * Lee a un empleado
-     * @param empleado 
-     * @return El correspondiente empleado con toda su informacion, si no devuelve null
+     * 
+     * @param empleado
+     * @return El correspondiente empleado con toda su informacion, si no devuelve
+     *         null
      */
     Empleado read(Empleado empleado);
 
     /**
      * Actualizar informacion de empleado
+     * 
      * @param empleado
      * @return
      */

@@ -11,9 +11,8 @@ public class Programa {
         FileOperations fichero = new FileOperations();
         Empleado empleado1 = new Empleado("12345678X", "Pedro", "Informatico", 1000.50,
                 "15/10/1995");
-       
+
         fichero.create(empleado1);
-        
 
         System.out.println(empleado1.getEdad());
 

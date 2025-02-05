@@ -83,14 +83,15 @@ public class Empleado {
         return this.fechaNacimiento;
     }
 
-     /**
+    /**
      * Metodo para obtener la fecha de nacimiento como LocalDate
+     * 
      * @return LocalDate de la fecha de nacimiento
      */
     public LocalDate getFechaNacimientoDate() {
         String fecha = getFechaNacimiento();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
+
         LocalDate fechaNacimiento = LocalDate.parse(fecha, formato);
         return fechaNacimiento;
     }
@@ -144,8 +145,10 @@ public class Empleado {
     public String toString() {
         return identificador + "," + nombre + "," + puesto + "," + salario + "," + fechaNacimiento;
     }
-     /**
+
+    /**
      * Metodo para obtener la edad del empleado
+     * 
      * @return edad en anios
      */
     public int getEdad() {
