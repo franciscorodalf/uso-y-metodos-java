@@ -18,7 +18,13 @@ public class FileOperations implements Operations {
 
     File fichero;
     String path = "C:\\Users\\Francisco\\Documents\\GitHub\\uso-y-metodos-java\\src\\main\\resources\\empleados.txt";
-    String Archivo = "empleados.txt";
+
+    public FileOperations() {
+        fichero = new File(path);
+        if (!fichero.exists() || !fichero.isFile()) {
+            throw new IllegalArgumentException("El recurso no es de tipo fichero " + path);
+        }
+    }
 
     @Override
     public boolean create(Empleado empleado) {
@@ -32,7 +38,7 @@ public class FileOperations implements Operations {
         return create(empleado.toString(), fichero);
     }
 
-    private boolean create(String data, File file) {
+    public static boolean create(String data, File file) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(data);
             writer.newLine();
@@ -53,32 +59,10 @@ public class FileOperations implements Operations {
                             Double.parseDouble(arrayLine[3]), arrayLine[4]);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
         return null;
-    }
-
-    /**
-     * Metodo para leer un archivo entero
-     * 
-     * @param file que se quiere leer
-     * @return lista del archivo
-     */
-    private Set<Empleado> read(File file) {
-        Set<Empleado> empleados = new HashSet<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] arrayLine = line.split(",");
-                Empleado empleado = new Empleado(arrayLine[0], arrayLine[1], arrayLine[2],
-                        Double.parseDouble(arrayLine[3]), arrayLine[4]);
-                empleados.add(empleado);
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-        return empleados;
     }
 
     @Override
@@ -110,19 +94,6 @@ public class FileOperations implements Operations {
         return true;
     }
 
-    private boolean updateFile(Set<Empleado> empleados, File file) {
-        try {
-            file.delete();
-            file.createNewFile();
-        } catch (IOException e) {
-            return false;
-        }
-        for (Empleado empleado : empleados) {
-            create(empleado);
-        }
-        return true;
-    }
-
     @Override
     public boolean delete(String identificador) {
         if (identificador == null) {
@@ -135,7 +106,21 @@ public class FileOperations implements Operations {
                 return updateFile(empleados, fichero);
             }
         }
+        return true;
+    }
 
+    private boolean updateFile(Set<Empleado> empleados, File file) {
+        String path = file.getAbsolutePath();
+        try {
+            file.delete();
+            file.createNewFile();
+
+        } catch (IOException e) {
+            return true;
+        }
+        for (Empleado empleado : empleados) {
+            create(empleado);
+        }
         return true;
     }
 
@@ -181,4 +166,18 @@ public class FileOperations implements Operations {
         }
         return empleados;
     }
+
+    public static Set<Empleado> read(File file) {
+        Set<Empleado> empleados = new HashSet<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return empleados;
+    }
+
 }

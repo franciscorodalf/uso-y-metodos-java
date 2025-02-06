@@ -1,0 +1,5 @@
+Fran,12345678, programador, 1200.0, 24/01/2000
+11111111U,Juan Pérez, Desarrollador, 3000.5, 15/10/1995
+00000000U,Ana Gómez, Diseñadora, 2800.75, 10/01/1990
+22222222U,Luis López, Gerente, 4000.0, 30/07/2000
+66666666U,Alvaro Garcia, Gerente, 10000.0, 04/02/2000
