@@ -110,7 +110,6 @@ public class FileOperations implements Operations {
     }
 
     private boolean updateFile(Set<Empleado> empleados, File file) {
-        String path = file.getAbsolutePath();
         try {
             file.delete();
             file.createNewFile();
